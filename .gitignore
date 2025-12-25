@@ -1,0 +1,13 @@
+# virtual environment
+venv/
+.env
+
+# python cache
+__pycache__/
+*.pyc
+
+# FAISS local index (do not push binaries)
+faiss_index/
+
+# OS files
+.DS_Store
