@@ -1,4 +1,5 @@
 import os
+print("DEBUG KEY:", os.getenv("OPENAI_API_KEY"))
 from openai import OpenAI
 
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -28,9 +29,11 @@ print("FAISS index loaded")
 # STEP 3: OpenAI client
 # (DIRECT KEY – GUARANTEED)
 # -------------------------------
-client = OpenAI(
-    api_key="sk-PASTE-YOUR-REAL-API-KEY-HERE"
-)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+if not os.getenv("OPENAI_API_KEY"):
+    raise ValueError("OPENAI_API_KEY not set")
+
 
 # -------------------------------
 # STEP 4: Ask questions (RAG)
@@ -69,12 +72,20 @@ Answer:
 # -------------------------------
 # STEP 5: Interactive chatbot
 # -------------------------------
+# -------------------------------
+# STEP 5: Interactive chatbot
+# -------------------------------
 print("\nCustomer Support Chatbot (type 'exit' to quit)\n")
 
 while True:
-    user_query = input("You: ")
+    user_query = input("You: ").strip()
 
-    if user_query.lower() in ["exit", "quit"]:
+    # handle empty input
+    if not user_query:
+        print("Bot: Please ask a question.")
+        continue
+
+    if user_query.lower() in ("exit", "quit"):
         print("Bot: Thank you! Have a nice day.")
         break
 
