@@ -69,9 +69,7 @@ Answer:
     return response.choices[0].message.content.strip()
 
 
-# -------------------------------
-# STEP 5: Interactive chatbot
-# -------------------------------
+
 # -------------------------------
 # STEP 5: Interactive chatbot
 # -------------------------------
